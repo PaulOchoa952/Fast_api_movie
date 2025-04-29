@@ -139,7 +139,8 @@
  ```
 
  ---
-owatchlist/
+ ``` 
+Towatchlist/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py          # Entry point for the FastAPI app
@@ -152,5 +153,6 @@ owatchlist/
 ├── requirements.txt     # Dependencies for the project
 ├── movies.db            # SQLite database file
 └── README.md            # Documentation for the task
+ ```
 ---
  Let me know if you need further assistance!
