@@ -22,6 +22,23 @@
  The **Towatchlist Project** is a movie management app that allows users to keep track of movies they want to watch. It provides a RESTful API to perform CRUD operations on a list of movies stored in an SQLite database.
 
  ---
+  ## Project structure
+ ``` 
+Towatchlist/
+├── app/
+│   ├── __init__.py
+│   ├── main.py          # Entry point for the FastAPI app
+│   ├── models.py        # SQLAlchemy models for the database
+│   ├── schemas.py       # Pydantic schemas for request/response validation
+│   ├── crud.py          # CRUD operations for the database
+│   ├── database.py      # Database connection setup
+│   └── logger.py        # Logging middleware
+├── Dockerfile           # Dockerfile to containerize the app
+├── requirements.txt     # Dependencies for the project
+├── movies.db            # SQLite database file
+└── README.md            # Documentation for the task
+ ```
+ ---
 
  ## Features
 
@@ -138,21 +155,5 @@
  http://127.0.0.1:8000/docs
  ```
 
- ---
- ``` 
-Towatchlist/
-├── app/
-│   ├── __init__.py
-│   ├── main.py          # Entry point for the FastAPI app
-│   ├── models.py        # SQLAlchemy models for the database
-│   ├── schemas.py       # Pydantic schemas for request/response validation
-│   ├── crud.py          # CRUD operations for the database
-│   ├── database.py      # Database connection setup
-│   └── logger.py        # Logging middleware
-├── Dockerfile           # Dockerfile to containerize the app
-├── requirements.txt     # Dependencies for the project
-├── movies.db            # SQLite database file
-└── README.md            # Documentation for the task
- ```
 ---
  Let me know if you need further assistance!
