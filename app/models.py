@@ -14,3 +14,11 @@ class Movie(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = Column(String, default="active")
+
+class Log(Base):
+    __tablename__ = "logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    method = Column(String, nullable=False)
+    endpoint = Column(String, nullable=False)
+    timestamp = Column(DateTime, default=datetime.utcnow)

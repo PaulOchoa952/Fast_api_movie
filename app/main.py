@@ -9,9 +9,13 @@ from .crud import (
     mark_as_watched,
     delete_movie,
 )
-from .schemas import MovieCreate,Movie  # Import schemas
+from .schemas import MovieCreate, Movie
+from .logger import log_middleware  # Import the logging middleware
 
 app = FastAPI()
+
+# Add the logging middleware to the FastAPI application
+app.middleware("http")(log_middleware)
 
 
 # Dependency to get the database session
