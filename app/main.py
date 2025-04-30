@@ -35,7 +35,8 @@ def get_db():
     finally:
         db.close()
 
-
+# Initialize the database on startup
+# This function is called when the FastAPI application starts up.
 @app.on_event("startup")
 def startup():
     init_db()
