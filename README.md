@@ -1,159 +1,137 @@
- # Towatchlist Project
+# Towatchlist Project
 
- Welcome to the **Towatchlist Project**! This project is a CRUD (Create, Read, Update, Delete) application to manage a list of movies you want to watch. It is built using Python, FastAPI, and SQLite, and it is containerized with Docker for easy deployment.
+A robust movie watchlist manager built with FastAPI, SQLite, and Docker. Track your movies, mark them as watched, and manage your watchlist efficiently.
 
- ---
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org)
 
- ## Table of Contents
+## 🚀 Quick Start
 
- 1. [Project Description](#project-description)
- 2. [Features](#features)
- 3. [Setup and Installation](#setup-and-installation)
- 4. [How to Run](#how-to-run)
- 5. [Usage](#usage)
- 6. [Testing](#testing)
- 7. [Docker Support](#docker-support)
- 8. [API Documentation](#api-documentation)
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/Towatchlist.git
 
- ---
+# Navigate to project directory
+cd Towatchlist
 
- ## Project Description
+# Run with Docker
+docker-compose up --build
+```
 
- The **Towatchlist Project** is a movie management app that allows users to keep track of movies they want to watch. It provides a RESTful API to perform CRUD operations on a list of movies stored in an SQLite database.
+## 🎯 Features
 
- ---
-  ## Project structure
- ``` 
+- ✨ **Movie Management**: Full CRUD operations for your movie watchlist
+- 📊 **Status Tracking**: Mark movies as watched/unwatched
+- 🔒 **Soft Delete**: Safe deletion with status tracking
+- 📝 **Request Logging**: Automatic logging of all HTTP requests
+- 🏥 **Health Checks**: Built-in monitoring endpoints
+- 🐳 **Docker Support**: Easy deployment with containers
+
+## 🏗️ Project Structure
+
+```
 Towatchlist/
 ├── app/
 │   ├── __init__.py
-│   ├── main.py          # Entry point for the FastAPI app
-│   ├── models.py        # SQLAlchemy models for the database
-│   ├── schemas.py       # Pydantic schemas for request/response validation
-│   ├── crud.py          # CRUD operations for the database
-│   ├── database.py      # Database connection setup
-│   └── logger.py        # Logging middleware
-├── Dockerfile           # Dockerfile to containerize the app
-├── requirements.txt     # Dependencies for the project
-├── movies.db            # SQLite database file
-└── README.md            # Documentation for the task
- ```
- ---
+│   ├── main.py          # FastAPI application
+│   ├── models.py        # Database models
+│   ├── schemas.py       # Pydantic schemas
+│   ├── crud.py         # Database operations
+│   ├── database.py     # Database configuration
+│   └── logger.py       # Request logging
+├── docker/             # Docker configuration files
+├── tests/             # Unit and integration tests
+├── .env.example       # Environment variables template
+├── docker-compose.yml # Docker compose configuration
+├── Dockerfile         # Docker build instructions
+└── README.md         # Project documentation
+```
 
- ## Features
+## 🛠️ Installation
 
- - **Add Movies**: Add new movies to your list.
- - **View Movies List**: Retrieve the full list of movies (showing name, release date, and watched status).
- - **View Movie Details**: Retrieve details of a specific movie using its ID.
- - **Update Movies**: Modify movie details (update the name and/or release date).
- - **Mark as Watched**: Update the watched field to `true` for movies you've already watched.
- - **Delete Movies**: Mark movies as deleted (soft delete).
- - **Logging**: Logs every HTTP request (method, endpoint, and timestamp) into the database.
- - **Health Checks**: Includes health checks to ensure application reliability.
+### Local Development
 
- ---
+```bash
+# Create virtual environment
+python -m venv env
 
- ## Setup and Installation
+# Activate virtual environment
+# Windows:
+.\env\Scripts\activate
+# Unix/macOS:
+source env/bin/activate
 
- 1. **Clone the Repository**  
-    Clone this repository to your local machine:
-    ```bash
-    git clone <repository_url>
-    ```
+# Install dependencies
+pip install -r requirements.txt
 
- 2. **Navigate to the Project Directory**  
-    ```bash
-    cd Towatchlist
-    ```
+# Set up environment variables
+cp .env.example .env
 
- 3. **Install Dependencies**  
-    Create and activate a virtual environment, then install the required dependencies:
-    ```bash
-    python -m venv env
-    source env/bin/activate  # On Windows: env\Scripts\activate
-    pip install -r requirements.txt
-    ```
+# Start the application
+uvicorn app.main:app --reload
+```
 
- 4. **Initialize the Database**  
-    Run the following command to create the SQLite database:
-    ```bash
-    python -m app.database
-    ```
+### Docker Deployment
 
- ---
+```bash
+# Build and start containers
+docker-compose up --build
 
- ## How to Run
+# Stop containers
+docker-compose down
+```
 
- 1. **Run the FastAPI App**  
-    Start the FastAPI server:
-    ```bash
-    uvicorn app.main:app --reload
-    ```
+## 🔌 API Endpoints
 
- 2. **Access the API Documentation**  
-    Open your browser and navigate to:
-    ```
-    http://127.0.0.1:8000/docs
-    ```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/movies` | List all movies |
+| POST | `/movies` | Add a new movie |
+| GET | `/movies/{id}` | Get movie details |
+| PUT | `/movies/{id}` | Update movie details |
+| PUT | `/movies/{id}/watched` | Mark as watched |
+| DELETE | `/movies/{id}` | Delete a movie |
+| GET | `/health` | Check API health |
 
- ---
+## 🧪 Testing
 
- ## Usage
+```bash
+# Run tests
+pytest
 
-  Endpoints
- - **POST /movies/**: Add a new movie.
- - **GET /movies/**: Retrieve the list of all movies.
- - **GET /movies/{movie_id}**: Retrieve details of a specific movie.
- - **PUT /movies/{movie_id}**: Update the name and/or release date of a movie.
- - **PUT /movies/{movie_id}/watched**: Mark a movie as watched.
- - **DELETE /movies/{movie_id}**: Soft delete a movie.
+# Run tests with coverage
+pytest --cov=app tests/
+```
 
- ---
+## 🔐 Environment Variables
 
- ## Testing
+Create a `.env` file in the root directory:
 
- The project includes integration with `pytest` for unit testing. To run the test suite:
+```env
+DATABASE_URL=sqlite:///./movies.db
+APP_ENV=development
+```
 
- 1. Navigate to the `tests` folder:
-    ```bash
-    cd tests
-    ```
+## 📚 Documentation
 
- 2. Run the tests:
-    ```bash
-    pytest
-    ```
+- API Documentation: `http://localhost:8000/docs`
+- ReDoc Interface: `http://localhost:8000/redoc`
 
- ---
+## 🤝 Contributing
 
- ## Docker Support
+1. Fork the repository
+2. Create a new branch
+3. Make your changes
+4. Submit a pull request
 
- The project includes a `Dockerfile` to containerize the application.
+## 📄 License
 
- 1. **Build the Docker Image**  
-    ```bash
-    docker build -t towatchlist .
-    ```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
- 2. **Run the Docker Container**  
-    ```bash
-    docker run -p 8000:8000 towatchlist
-    ```
+## 👥 Contact
 
- 3. **Access the API**  
-    Open your browser and navigate to:
-    ```
-    http://127.0.0.1:8000/docs
-    ```
-
- ---
-
- ## API Documentation
-
- The API documentation is automatically generated by FastAPI and is available at:
- ```
- http://127.0.0.1:8000/docs
- ```
-
----
- Let me know if you need further assistance!
+- Author: Your Name
+- Email: alejochoa99@gmail.com
+- GitHub: [@PaulOchoa952](https://github.com/PaulOchoa952)
