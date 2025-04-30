@@ -4,7 +4,7 @@ from datetime import datetime
 
 Base = declarative_base()
 
-
+# This is the Movie model that represents the movies table in the database.
 class Movie(Base):
     __tablename__ = "movies"
     id = Column(Integer, primary_key=True, index=True)
@@ -15,6 +15,7 @@ class Movie(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = Column(String, default="active")
 
+# This is the Log model that represents the logs table in the database.
 class Log(Base):
     __tablename__ = "logs"
 
