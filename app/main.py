@@ -18,6 +18,14 @@ app = FastAPI()
 # Add the logging middleware to the FastAPI application
 app.middleware("http")(log_middleware)
 
+#health check endpoint
+@app.get("/health",tags=["Health Check"])
+def health_check():
+    """
+    Health check endpoint to verify if the API is running.
+    Returns a simple message indicating the API is up and running.
+    """
+    return {"status": "healthy", "message": "API is up and running"}
 
 # Dependency to get the database session
 def get_db():
