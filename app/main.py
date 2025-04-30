@@ -8,6 +8,7 @@ from .crud import (
     update_movie,
     mark_as_watched,
     delete_movie,
+    get_logs
 )
 from .schemas import MovieCreate, Movie
 from .logger import log_middleware  # Import the logging middleware
@@ -83,3 +84,13 @@ def soft_delete_movie(movie_id: int, db: Session = Depends(get_db)):
     if not movie:
         raise HTTPException(status_code=404, detail="Movie not found")
     return {"detail": "Movie deleted successfully"}
+
+# Get all logs
+@app.get("/logs/", response_model=list[dict])
+def list_logs(db: Session = Depends(get_db)):
+    """
+    Endpoint to retrieve all logs from the database.
+    This endpoint returns a list of dictionaries, each containing the method, endpoint, and timestamp of the log entry.
+    """
+    logs = get_logs(db)
+    return logs

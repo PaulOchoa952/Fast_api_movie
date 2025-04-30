@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from .models import Movie
-
+from .models import Log
 
 def create_movie(db: Session, name: str, release_date: str):
     movie = Movie(name=name, release_date=release_date)
@@ -49,3 +49,10 @@ def delete_movie(db: Session, movie_id: int):
         movie.status = "deleted"
         db.commit()
     return movie
+
+def get_logs(db: Session):
+    """
+    Devuelve todas las entradas de la tabla 'logs' como diccionarios.
+    """
+    logs = db.query(Log).all()
+    return [{"method": log.method, "endpoint": log.endpoint, "timestamp": log.timestamp} for log in logs]
