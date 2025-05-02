@@ -16,17 +16,3 @@ services:
       interval: 30s
       timeout: 30s
       retries: 5
-
-  frontend-dev:
-    image: node:18
-    working_dir: /app
-    volumes:
-      - ./frontend:/app
-    ports:
-      - "4200:4200"
-    command: >
-      bash -c "cd /app &&
-               npm install -g @angular/cli &&
-               ng new towatchlist-frontend --routing --style=scss --skip-git --defaults --force &&
-               cd towatchlist-frontend &&
-               ng serve --host 0.0.0.0"
