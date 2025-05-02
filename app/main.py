@@ -10,7 +10,7 @@ from .crud import (
     mark_as_watched,
     delete_movie,
     get_logs
-)
+)# Import the CRUD functions
 from .schemas import MovieCreate, Movie
 from .logger import log_middleware  # Import the logging middleware
 from .exceptions import(
@@ -21,7 +21,7 @@ from .exceptions import(
 )
 from fastapi.exceptions import RequestValidationError
 
-app = FastAPI()
+app = FastAPI()# Initialize FastAPI application
 
 #add exception handlers for database and validation errors
 app.add_exception_handler(SQLAlchemyError, database_exception_handler)
@@ -30,7 +30,7 @@ app.add_exception_handler(RequestValidationError, validation_exception_handler)
 # Add the logging middleware to the FastAPI application
 app.middleware("http")(log_middleware)
 
-#health check endpoint
+# health check endpoint
 @app.get("/health",tags=["Health Check"])
 def health_check():
     """
