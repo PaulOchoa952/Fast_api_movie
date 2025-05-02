@@ -43,7 +43,7 @@ def health_check():
 def get_db():
     db = SessionLocal()
     try:
-        yield db
+        yield db # This will be used to get a database session for each request
     finally:
         db.close()
 
@@ -64,7 +64,7 @@ def add_movie(movie: MovieCreate, db: Session = Depends(get_db)):
 
 
 # List all movies
-@app.get("/movies/", response_model=list[Movie])
+@app.get("/movies/", response_model=list[Movie])# wrap the response in a list
 def list_movies(db: Session = Depends(get_db)):
     try:
         movies = get_movies(db)
